@@ -22,3 +22,9 @@ class PruebasMensaje(TestCase):
         self.assertEqual(respuesta.status_code, 200)
         self.assertTemplateUsed(respuesta, "inicio.html")
         self.assertContains(respuesta, "Esta es una prueba.")
+
+class PruebasSinMensajes(TestCase):
+    def test_pagina_vacia(self):
+        respuesta = self.client.get(reverse("inicio"))
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertContains(respuesta, "Todavía no hay mensajes.")

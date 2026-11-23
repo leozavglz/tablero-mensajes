@@ -7,6 +7,7 @@
 </head>
 <body>
   <h1>Tablero de mensajes</h1>
+    <p>Hay {{ mensajes|length }} mensaje{{ mensajes|length|pluralize }}.</p>
   <ul>
     {% for mensaje in mensajes %}
       <li>{{ mensaje.texto }}</li>
