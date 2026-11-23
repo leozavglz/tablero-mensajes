@@ -43,3 +43,11 @@ class PruebasFechaMensaje(TestCase):
         Mensaje.objects.filter(pk=mensaje.pk).update(fecha=fecha)
         respuesta = self.client.get(reverse("inicio"))
         self.assertRegex(respuesta.content.decode(), r"10 de \w+, 17:55")
+
+
+class PruebasContenidoPagina(TestCase):
+    def test_autor_y_contador(self):
+        Mensaje.objects.create(texto="Hola", autor="Leo")
+        respuesta = self.client.get(reverse("inicio"))
+        self.assertContains(respuesta, "Leo")
+        self.assertContains(respuesta, "Hay 1 mensaje.")

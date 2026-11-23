@@ -10,8 +10,7 @@
   <p>Hay {{ mensajes|length }} mensaje{{ mensajes|length|pluralize }}.</p>
   <ul>
     {% for mensaje in mensajes %}
-      <li>{{ mensaje.texto }} <small>({{ mensaje.fecha|date:"j \d\e F, H:i" }})</small></li>
-    {% empty %}
+<li>{{ mensaje.texto }} <small>— {{ mensaje.autor }}, {{ mensaje.fecha|date:"j \d\e F, H:i" }}</small></li>    {% empty %}
       <li>Todavía no hay mensajes.</li>
     {% endfor %}
   </ul>
