@@ -1,6 +1,8 @@
 # mensajes/tests.py
 from django.test import TestCase
 from django.urls import reverse
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from .models import Mensaje
 
@@ -33,4 +35,11 @@ class PruebasSinMensajes(TestCase):
         self.assertEqual(respuesta.status_code, 200)
         self.assertContains(respuesta, "Todavía no hay mensajes.")
 
-  
+
+class PruebasFechaMensaje(TestCase):
+    def test_fecha_en_pagina(self):
+        mensaje = Mensaje.objects.create(texto="Mensaje con fecha")
+        fecha = datetime(2026, 10, 10, 17, 55, tzinfo=ZoneInfo("America/Mexico_City"))
+        Mensaje.objects.filter(pk=mensaje.pk).update(fecha=fecha)
+        respuesta = self.client.get(reverse("inicio"))
+        self.assertRegex(respuesta.content.decode(), r"10 de \w+, 17:55")

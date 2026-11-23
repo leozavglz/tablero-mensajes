@@ -6,5 +6,6 @@ from .models import Mensaje
 
 @admin.register(Mensaje)
 class MensajeAdmin(admin.ModelAdmin):
-    list_display = ["texto", "fecha"]
+    list_display = ["texto", "autor", "fecha"]
+    list_filter = ["fecha"]
     search_fields = ["texto"]

@@ -7,10 +7,10 @@
 </head>
 <body>
   <h1>Tablero de mensajes</h1>
-    <p>Hay {{ mensajes|length }} mensaje{{ mensajes|length|pluralize }}.</p>
+  <p>Hay {{ mensajes|length }} mensaje{{ mensajes|length|pluralize }}.</p>
   <ul>
     {% for mensaje in mensajes %}
-      <li>{{ mensaje.texto }}</li>
+      <li>{{ mensaje.texto }} <small>({{ mensaje.fecha|date:"j \d\e F, H:i" }})</small></li>
     {% empty %}
       <li>Todavía no hay mensajes.</li>
     {% endfor %}
